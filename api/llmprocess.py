@@ -1,11 +1,9 @@
 import google.generativeai as genai
 from youtube_transcript_api import YouTubeTranscriptApi
-from transformers import AutoTokenizer
 
 GOOGLE_API_KEY='AIzaSyACKz-i5GfZF3hbbtwV_ZvqaCnaokhnbUg'
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-pro')
-tokenizer = AutoTokenizer.from_pretrained("gpt2")
 
 
 def get_transcripts(youtube_url):
@@ -19,17 +17,15 @@ def get_transcripts(youtube_url):
     full_transcript = " ".join([entry['text'] for entry in transcript])
     return full_transcript
 
-def chunk_text(text, max_token_length=4000):
-    # Tokenize the text
-    tokens = tokenizer.encode(text, add_special_tokens=False)
-
-    # Chunk tokens into max_token_length chunks
-    chunks = [tokens[i:i + max_token_length] for i in range(0, len(tokens), max_token_length)]
-
-    # Decode token chunks back into text
-    chunked_texts = [tokenizer.decode(chunk) for chunk in chunks]
-
-    return chunked_texts
+def chunk_text_by_char(text, max_char_length=18500):
+    # Initialize a list to hold the chunks
+    chunks = []
+    
+    # Split the text into chunks of the specified maximum length
+    for i in range(0, len(text), max_char_length):
+        chunks.append(text[i:i + max_char_length])
+    
+    return chunks
 
 def generate_summary(text):
     prompt = f"Summarize the following text with cover all context:\n\n{text}\n\nSummary:"
@@ -38,6 +34,6 @@ def generate_summary(text):
 
 def final_summary(youtube_url):
     full_transcript = get_transcripts(youtube_url)
-    chunks = chunk_text(full_transcript)
+    chunks = chunk_text_by_char(full_transcript)
     summaries = [generate_summary(chunk) for chunk in chunks]
     return  " ".join(summaries)
