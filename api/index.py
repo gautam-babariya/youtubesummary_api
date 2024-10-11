@@ -1,20 +1,19 @@
 from flask import Flask, request, jsonify
-# from .llmprocess import final_summary
+from .llmprocess import final_summary
 # from .llmprocess import get_transcripts
-from youtube_transcript_api import YouTubeTranscriptApi
 
 
-def get_transcripts(youtube_url):
-    # Extract the video ID from the YouTube URL
-    video_id = youtube_url.split("=")[1]
+# def get_transcripts(youtube_url):
+#     # Extract the video ID from the YouTube URL
+#     video_id = youtube_url.split("=")[1]
 
-    # try:
-    #     transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['en', 'hi', 'gu'])
-    # except Exception as e:
-    #     raise Exception(f"Error fetching transcript: {e}")
+#     # try:
+#     #     transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['en', 'hi', 'gu'])
+#     # except Exception as e:
+#     #     raise Exception(f"Error fetching transcript: {e}")
 
-    # full_transcript = " ".join([entry['text'] for entry in transcript])
-    return video_id
+#     # full_transcript = " ".join([entry['text'] for entry in transcript])
+#     return video_id
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -33,7 +32,7 @@ def generate():
         data = request.json
         youtube_url = data.get('youtube_url')
 
-        summary = get_transcripts(youtube_url)
+        summary = final_summary(youtube_url)
         
         # Return the summary
         return jsonify({
