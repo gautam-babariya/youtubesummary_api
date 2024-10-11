@@ -10,13 +10,13 @@ def get_transcripts(youtube_url):
     # Extract the video ID from the YouTube URL
     video_id = youtube_url.split("=")[1]
 
-    # try:
-    #     transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['en', 'hi', 'gu'])
-    # except Exception as e:
-    #     raise Exception(f"Error fetching transcript: {e}")
+    try:
+        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['en', 'hi', 'gu'])
+    except Exception as e:
+        raise Exception(f"Error fetching transcript: {e}")
 
-    # full_transcript = " ".join([entry['text'] for entry in transcript])
-    return video_id
+    full_transcript = " ".join([entry['text'] for entry in transcript])
+    return full_transcript
 
 def chunk_text_by_char(text, max_char_length=18500):
     # Initialize a list to hold the chunks
