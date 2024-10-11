@@ -13,6 +13,7 @@ def get_transcripts(youtube_url):
     try:
         transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['en', 'hi', 'gu'])
     except Exception as e:
+        print(f"Error fetching transcript for video ID {video_id}: {str(e)}")
         raise Exception(f"Error fetching transcript: {e}")
 
     full_transcript = " ".join([entry['text'] for entry in transcript])
@@ -35,7 +36,6 @@ def generate_summary(text):
 
 def final_summary(youtube_url):
     full_transcript = get_transcripts(youtube_url)
-    # chunks = chunk_text_by_char(full_transcript)
-    # summaries = [generate_summary(chunk) for chunk in chunks]
-    # return  " ".join(summaries)
-    return full_transcript
+    chunks = chunk_text_by_char(full_transcript)
+    summaries = [generate_summary(chunk) for chunk in chunks]
+    return  " ".join(summaries)
