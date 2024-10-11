@@ -9,6 +9,8 @@ model = genai.GenerativeModel('gemini-pro')
 def get_transcripts(youtube_url):
     # Extract the video ID from the YouTube URL
     video_id = youtube_url.split("=")[1]
+
+    print(video_id)
     try:
         transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['en', 'hi', 'gu'])
     except Exception as e:
