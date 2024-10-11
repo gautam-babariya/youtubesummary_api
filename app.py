@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from .llmprocess import final_summary
+from llmprocess import final_summary
 from youtube_transcript_api import YouTubeTranscriptApi
 
 
