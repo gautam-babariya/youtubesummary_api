@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import llmprocess as llmprocess
+from .llmprocess import final_summary
 
 # Initialize the Flask application
 app = Flask(__name__)
