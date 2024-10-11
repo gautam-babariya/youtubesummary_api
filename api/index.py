@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from .llmprocess import final_summary
+from .llmprocess import get_transcripts
 
 # Initialize the Flask application
 app = Flask(__name__)
