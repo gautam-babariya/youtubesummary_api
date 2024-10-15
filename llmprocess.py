@@ -1,9 +1,9 @@
 import google.generativeai as genai
 from youtube_transcript_api import YouTubeTranscriptApi
 
-GOOGLE_API_KEY='AIzaSyACKz-i5GfZF3hbbtwV_ZvqaCnaokhnbUg'
+GOOGLE_API_KEY='AIzaSyBeTHnFgFm-ZX1V7ETvPAAWMd8Oe0QnuAg'
 genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 
 def get_transcripts(youtube_url):
@@ -19,7 +19,7 @@ def get_transcripts(youtube_url):
     full_transcript = " ".join([entry['text'] for entry in transcript])
     return full_transcript
 
-def chunk_text_by_char(text, max_char_length=18500):
+def chunk_text_by_char(text, max_char_length=2500):
     # Initialize a list to hold the chunks
     chunks = []
     
