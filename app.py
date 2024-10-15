@@ -1,15 +1,16 @@
 from flask import Flask, request, jsonify
 from llmprocess import final_summary
 from youtube_transcript_api import YouTubeTranscriptApi
-
+from flask_cors import CORS
 
 # Initialize the Flask application
 app = Flask(__name__)
+CORS(app)
 
 # Define a simple route for the home page
 @app.route('/', methods=['GET'])
 def home():
-    return "Flask app is working!"
+    return {"message": "Hello from Flask API"}
 
 @app.route('/generate', methods=['POST'])
 def generate():
@@ -34,4 +35,4 @@ def generate():
 
 if __name__ == '__main__':
     # Run the Flask app on localhost:5000
-    app.run()
+    app.run(debug=True)
