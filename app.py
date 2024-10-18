@@ -12,8 +12,6 @@ CORS(app)
 def home():
     return {"message": "Hello from Flask API"}
 
-sum = "start"
-print(sum)
 @app.route('/generateyoutube', methods=['POST'])
 def generate():
     try:
@@ -22,8 +20,6 @@ def generate():
         youtube_url = data.get('youtube_url')
 
         summary = final_summary(youtube_url)
-        sum = summary
-        print(sum)
         # Return the summary
         return jsonify({
             'status': 'success',
