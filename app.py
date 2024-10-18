@@ -3,6 +3,7 @@ from llmprocess import final_summary
 from youtube_transcript_api import YouTubeTranscriptApi
 from flask_cors import CORS
 
+
 # Initialize the Flask application
 app = Flask(__name__)
 CORS(app)
@@ -34,4 +35,4 @@ def generate():
 
 if __name__ == '__main__':
     # Run the Flask app on localhost:5000
-    app.run(debug=True)
+    app.run()
