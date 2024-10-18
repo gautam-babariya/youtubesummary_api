@@ -33,6 +33,6 @@ def generate():
             'message': str(e)
         }), 500
 
-if __name__ == '__main__':
-    # Run the Flask app on localhost:5000
-    app.run()
+# if __name__ == '__main__':
+#     # Run the Flask app on localhost:5000
+#     app.run()
