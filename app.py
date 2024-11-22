@@ -4,6 +4,8 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from flask_cors import CORS
 from PyPDF2 import PdfReader
 from io import BytesIO
+from googletrans import Translator
+
 
 
 # Initialize the Flask application
@@ -70,6 +72,17 @@ def upload_file():
 
     except Exception as e:
         return jsonify({"error": f"Failed to process file: {str(e)}"}), 500    
+
+@app.route('/translate', methods=['POST'])
+def translate_text():
+    text = request.json.get('text', '')
+    lang = request.json.get('lang', '')
+
+    if text:
+        translator = Translator()
+        translated = translator.translate(text, dest=lang)
+        return jsonify({'translated_text': translated.text})
+    return jsonify({'error': 'No text provided'}), 400
 
 if __name__ == '__main__':
     # Run the Flask app on localhost:5000

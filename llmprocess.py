@@ -1,7 +1,6 @@
 import google.generativeai as genai
 from youtube_transcript_api import YouTubeTranscriptApi
 from transformers import AutoTokenizer
-from pytube import YouTube
 
 GOOGLE_API_KEY='AIzaSyBeTHnFgFm-ZX1V7ETvPAAWMd8Oe0QnuAg'
 genai.configure(api_key=GOOGLE_API_KEY)
